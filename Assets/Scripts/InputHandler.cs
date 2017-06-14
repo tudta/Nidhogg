@@ -1,19 +1,32 @@
-﻿using System.Collections;
+﻿using System;
+using System.Linq;
+using System.Reflection;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class InputHandler : MonoBehaviour {
+    private GameManager gm = null;
+    [SerializeField] private List<Command> cmds = new List<Command>();
+    [SerializeField] private List<InputAction> actions = new List<InputAction>();
 
-    private List<Command> commands = new List<Command>();
-    private List<KeyCode> keys = new List<KeyCode>();
-	
-	// Use this for initialization
-	void Start () {
-		
+    // Use this for initialization
+    void Start () {
+        Init();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+    private void Init() {
+        gm = GameManager.Instance;
+    }
+
+    // Update is called once per frame
+    void Update () {
+        foreach (InputAction action in actions) {
+            if (Input.GetKeyDown(action.Key)) {
+                if (gm.CurrentState == action.State) {
+                    action.Cmd.Execute();
+                }
+            }
+        }
 	}
 }
