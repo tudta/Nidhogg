@@ -7,7 +7,6 @@ using UnityEngine;
 
 public class InputHandler : MonoBehaviour {
     private GameManager gm = null;
-    [SerializeField] private List<Command> cmds = new List<Command>();
     [SerializeField] private List<InputAction> actions = new List<InputAction>();
 
     // Use this for initialization

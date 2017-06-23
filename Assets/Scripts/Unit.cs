@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class Unit : MonoBehaviour {
-    private float moveSpeed = 0.0f;
-    private float jumpPower = 0.0f;
-    private Rigidbody rb = null;
+    [SerializeField] private float moveSpeed = 0.0f;
+    [SerializeField] private float jumpPower = 0.0f;
+    private Rigidbody2D rb = null;
+
+    public float MoveSpeed { get { return moveSpeed; } set { moveSpeed = value; } }
+    public float JumpPower { get { return jumpPower; } set { jumpPower = value; } }
+    public Rigidbody2D Rb { get { return rb; } set { rb = value; } }
 
     public virtual void Awake() {
 
@@ -23,7 +27,8 @@ public class Unit : MonoBehaviour {
 	}
 
     public virtual void Init() {
-        rb = GetComponent<Rigidbody>();
+        GameManager.Instance.AllUnits.Add(this);
+        rb = GetComponent<Rigidbody2D>();
     }
 
     public virtual void Move(Vector3 direction) {
