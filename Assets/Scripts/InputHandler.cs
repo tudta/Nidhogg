@@ -21,9 +21,18 @@ public class InputHandler : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         foreach (InputAction action in actions) {
-            if (Input.GetKeyDown(action.Key)) {
-                if (gm.CurrentState == action.State) {
-                    action.Cmd.Execute();
+            if (action.DetectHold) {
+                if (Input.GetKey(action.Key)) {
+                    if (gm.CurrentState == action.State) {
+                        action.Cmd.Execute();
+                    }
+                }
+            }
+            else {
+                if (Input.GetKeyDown(action.Key)) {
+                    if (gm.CurrentState == action.State) {
+                        action.Cmd.Execute();
+                    }
                 }
             }
         }
