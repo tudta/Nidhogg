@@ -6,6 +6,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObjects/Commands/Jump", fileName = "SOJump")]
 public class Jump : Command {
     public override void Execute() {
-        GameManager.Instance.PlayerUnit.Jump();
+        Player.Instance.Jump();
     }
 }
